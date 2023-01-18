@@ -1,0 +1,79 @@
+package com.citibank.main.domain;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+
+public class MyFileReader {
+private char[]data;
+private int length;
+private File file;
+private Reader reader;
+private FileReader fileReader;
+private BufferedReader bufferedReader;
+
+
+public MyFileReader(File file, Reader reader) {
+	super();
+	this.file = file;
+	this.reader = reader;
+}
+
+public MyFileReader(FileReader fileReader) {
+	this.fileReader = fileReader;
+	
+}
+public MyFileReader(BufferedReader bufferedReader) {
+	this.bufferedReader= bufferedReader;
+}
+
+public String readFileLineByLine(){
+	String fileData ="";
+
+	try {
+		String temp = bufferedReader.readLine();
+		do {
+			fileData = fileData + temp + "\n";
+			temp =bufferedReader.readLine();
+		}	while(temp != null);
+		return fileData;	
+	}catch (IOException e) {
+		System.out.println("error while reading file");
+		return "";
+	} finally {
+		try {
+			bufferedReader.close();
+		} catch (IOException e) {
+			System.out.println("error while closing buffer reader");
+		}
+	}
+}
+//public String readfile() {
+//	try {
+//		length = (int)file.length();
+//		data = new char[length];
+//		
+//		reader.read(data);
+//		String datafromfile = new String(data);
+//		return datafromfile;
+//		
+//	} catch (IOException e) {
+//		System.out.println("error while reading file");
+//		return"";
+//	}finally {
+//		try {
+//			reader.close();
+//			
+//		} catch (IOException e) {
+//		System.out.println("error while closing file");
+//			e.printStackTrace();
+//		}
+	
+	}
+	
+
+
+
+
